@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang=en>
+<head>
+<title>Jaanga Terrain PNG Viewer DE3 32-63</title>
+<meta charset=utf-8>
+</head>
+<body>
+<script>
+
+	var x = 63;
+	var y = 49;
+	var source = 'http://jaanga.github.com/terrain-de3-32-63/';
+
+	document.body.style.cssText = ' font: normal 12pt monospace; ';
+	
+
+	var info = document.body.appendChild( document.createElement( 'div' ) );
+	info.innerHTML = '<h1>Jaanga Terrain PNG Viewer<br><div id=menu></div></h1>';
+
+	var image = document.body.appendChild( document.createElement( 'img' ) );
+	image.src = source + x + '/' + y + '.png';
+	setText();
+
+	function getImage( direction) {
+		if ( direction === 'left' ) {
+			x--;
+			if ( x < 32 ) x = 63;
+		} else if ( direction === 'right' ) {
+			x++;
+			if ( x > 63 ) x = 32;
+		} else if ( direction === 'up' ) {
+			y--;
+			if ( y < 0 ) y = 127;
+		} else if ( direction === 'down' ) {
+			y++;
+			if ( y > 127 ) y = 0;
+		}
+		setText();
+		image.src = source + x + '/' + y + '.png';
+	}
+
+	function setText() {
+		var txt = 'x: ' + x + ' y: ' + y;
+		txt += '<br>' +
+			'<a href=JavaScript:getImage("left"); >&#8678;</a> ' +
+			'<a href=JavaScript:getImage("right"); >&#8680;</a> ' +
+			'<a href=JavaScript:getImage("up"); >&#8679;</a> ' +
+			'<a href=JavaScript:getImage("down"); >&#8681;</a>';
+		menu.innerHTML = txt;
+	}
+
+</script>
+</body>
+</html>
